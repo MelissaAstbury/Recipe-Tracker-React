@@ -1,0 +1,16 @@
+.food-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  margin-top: 20px;
+  min-width: 250px;
+  padding: 10px 10px 10px 10px;
+  outline: none;
+  color: black;
+  border-radius: 8px;
+  border: 0px solid;
+  text-align: left;
+  cursor: pointer;
+}
