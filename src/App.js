@@ -3,7 +3,7 @@ import React from "react";
 import "./App.scss";
 
 import Header from "./Components/Header/Header";
-import CreateRecipe from "./Components/CreateRecipe/CreateRecipe";
+import CreateRecipe from "./Components/CreateRecipeButton/CreateRecipe";
 import RecipeForm from "./Components/RecipeForm/RecipeForm";
 
 function App() {
