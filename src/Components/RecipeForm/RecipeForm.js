@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import "./RecipeForm.scss";
+import { RecipeListContext } from "../../Context/RecipeContext";
 
 const RecipeForm = () => {
-  const [input, setInput] = useState("");
-  const [ingredient, setIngredient] = useState([]);
+  const { addIngredient } = useContext(RecipeListContext);
 
-  const onClick = () => {
-    setIngredient([...ingredient, input]);
+  const [input, setInput] = useState("");
+
+  const onClickingAdd = () => {
+    addIngredient(input);
     setInput("");
   };
 
@@ -19,6 +21,7 @@ const RecipeForm = () => {
           className="food-input"
           placeholder="Input ingredient"
           required
+          value={input}
           onChange={(e) => {
             setInput(e.target.value);
           }}
@@ -26,12 +29,9 @@ const RecipeForm = () => {
         <br />
         <div>
           <div className="btn">
-            <h3 onClick={onClick}>Add Ingredient</h3>
+            <h3 onClick={onClickingAdd}>Add Ingredient</h3>
           </div>
         </div>
-        {ingredient.map((item) => {
-          return <p>{item}</p>;
-        })}
       </form>
     </>
   );
