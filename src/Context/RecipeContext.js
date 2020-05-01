@@ -25,14 +25,10 @@ const RecipesContextProvider = (props) => {
   };
 
   const findItem = (item) => {
-    // const item = ingredients.find((item) => item.id === id);
     setEditItem(item);
   };
 
   const editIngredient = (input, id) => {
-    // const newItems = ingredients.map((item) =>
-    //   item.id === id ? { input, id } : item
-    // );
     const newItems = ingredients.map((item) => {
       return item.id === id ? { name: input, id: id } : item;
     });

@@ -2,14 +2,19 @@ import React from "react";
 
 import "./CreateRecipe.scss";
 
-const SignIn = () => {
+const CreateRecipe = () => {
   return (
     <div>
-      <div className="sign-in-btn">
-        <h3>Create Recipe</h3>
+      <div
+        className="create-recipe"
+        onClick={() => {
+          alert("clicked");
+        }}
+      >
+        <h3>Add Recipe</h3>
       </div>
     </div>
   );
 };
 
-export default SignIn;
+export default CreateRecipe;

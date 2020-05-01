@@ -9,11 +9,15 @@ const RecipeForm = () => {
   );
 
   const [input, setInput] = useState("");
+  const [nameInput, setNameInput] = useState("");
 
   const onClickingAdd = () => {
     if (editItem !== null) {
       editIngredient(input, editItem.id);
     } else {
+      if (input.length < 2) {
+        return;
+      }
       addIngredient(input);
       setInput("");
     }
@@ -30,11 +34,22 @@ const RecipeForm = () => {
   return (
     <>
       <form className="food-input">
-        <h3>Your Shopping List:</h3>
+        <h3>Recipe Name:</h3>
         <input
           type="text"
           className="food-input"
-          placeholder="Input ingredient..."
+          placeholder="Chilli con carne..."
+          required
+          value={nameInput}
+          onChange={(e) => {
+            setNameInput(e.target.value);
+          }}
+        />
+        <h3>Ingredients:</h3>
+        <input
+          type="text"
+          className="food-input"
+          placeholder="Milk, eggs, flour..."
           required
           value={input}
           onChange={(e) => {
