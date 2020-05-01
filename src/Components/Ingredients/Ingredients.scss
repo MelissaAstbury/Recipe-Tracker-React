@@ -1,33 +1,15 @@
-.remove-btn {
-  background-color: red;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  padding: 2px 8px;
-  margin-left: 16px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  cursor: pointer;
+.ingredient-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
 
-  &:hover {
-    opacity: 80%;
-  }
-}
+  .button-container {
+    display: flex;
+    flex-direction: row;
 
-.edit-btn {
-  background-color: #4caf50;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  padding: 2px 8px;
-  margin-left: 16px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 80%;
+    & div:last-child {
+      margin-left: 8px;
+    }
   }
 }

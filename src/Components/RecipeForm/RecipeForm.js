@@ -2,16 +2,21 @@ import React, { useContext, useState, useEffect } from "react";
 
 import "./RecipeForm.scss";
 import { RecipeListContext } from "../../Context/RecipeContext";
+import Button from "../UI/Button/Button";
 
 const RecipeForm = () => {
-  const { addIngredient, editItem, editIngredient } = useContext(
-    RecipeListContext
-  );
+  const {
+    addIngredient,
+    editItem,
+    editIngredient,
+    addRecipe,
+    ingredients,
+  } = useContext(RecipeListContext);
 
   const [input, setInput] = useState("");
   const [nameInput, setNameInput] = useState("");
 
-  const onClickingAdd = () => {
+  const onAddingIngredient = () => {
     if (editItem !== null) {
       editIngredient(input, editItem.id);
     } else {
@@ -21,6 +26,12 @@ const RecipeForm = () => {
       addIngredient(input);
       setInput("");
     }
+  };
+
+  const onAddRecipe = () => {
+    addRecipe(nameInput, ingredients);
+    setInput("");
+    setNameInput("");
   };
 
   useEffect(() => {
@@ -34,22 +45,20 @@ const RecipeForm = () => {
   return (
     <>
       <form className="food-input">
-        <h3>Recipe Name:</h3>
         <input
           type="text"
           className="food-input"
-          placeholder="Chilli con carne..."
+          placeholder="Recipe name..."
           required
           value={nameInput}
           onChange={(e) => {
             setNameInput(e.target.value);
           }}
         />
-        <h3>Ingredients:</h3>
         <input
           type="text"
           className="food-input"
-          placeholder="Milk, eggs, flour..."
+          placeholder="ingredients..."
           required
           value={input}
           onChange={(e) => {
@@ -58,9 +67,18 @@ const RecipeForm = () => {
         />
         <br />
         <div>
-          <div className="btn" onClick={onClickingAdd}>
-            <p>{editItem !== null ? "Edit Ingredient" : "Add Ingredient"}</p>
-          </div>
+          {ingredients.length > 2 && (
+            <Button btnType="success" clicked={onAddRecipe}>
+              Add Recipe
+            </Button>
+          )}
+          <br />
+          <Button
+            btnType={editItem !== null ? "danger" : "success"}
+            clicked={onAddingIngredient}
+          >
+            {editItem !== null ? "Edit Ingredient" : "Add Ingredient"}
+          </Button>
         </div>
       </form>
     </>
