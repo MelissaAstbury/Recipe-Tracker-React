@@ -62,6 +62,7 @@ const RecipesContextProvider = (props) => {
         editIngredient,
         addRecipe,
         componentShowing,
+        setComponentShowing,
       }}
     >
       {props.children}
