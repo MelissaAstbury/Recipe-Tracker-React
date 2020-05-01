@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import { v4 } from "uuid";
 
 export const RecipeListContext = createContext();
 
@@ -6,21 +7,37 @@ const RecipesContextProvider = (props) => {
   const initialState = JSON.parse(localStorage.getItem("ingredients")) || [];
 
   const [ingredients, setIngredients] = useState(initialState);
+  const [editItem, setEditItem] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("ingredients", JSON.stringify(ingredients));
   }, [ingredients]);
 
   const addIngredient = (input) => {
-    console.log(input);
-    setIngredients([...ingredients, input]);
+    setIngredients([...ingredients, { name: input, id: v4() }]);
   };
 
-  const removeIngredient = (itemIndex) => {
-    let newIngredients = ingredients.filter((item, index) => {
-      return index !== itemIndex;
+  const removeIngredient = (id) => {
+    let newIngredients = ingredients.filter((item) => {
+      return item.id !== id;
     });
     setIngredients(newIngredients);
+  };
+
+  const findItem = (item) => {
+    // const item = ingredients.find((item) => item.id === id);
+    setEditItem(item);
+  };
+
+  const editIngredient = (input, id) => {
+    // const newItems = ingredients.map((item) =>
+    //   item.id === id ? { input, id } : item
+    // );
+    const newItems = ingredients.map((item) => {
+      return item.id === id ? { name: input, id: id } : item;
+    });
+    setIngredients(newItems);
+    setEditItem(null);
   };
 
   const clearList = () => {
@@ -34,6 +51,9 @@ const RecipesContextProvider = (props) => {
         addIngredient,
         removeIngredient,
         clearList,
+        findItem,
+        editItem,
+        editIngredient,
       }}
     >
       {props.children}

@@ -1,25 +1,40 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import "./RecipeForm.scss";
 import { RecipeListContext } from "../../Context/RecipeContext";
 
 const RecipeForm = () => {
-  const { addIngredient } = useContext(RecipeListContext);
+  const { addIngredient, editItem, editIngredient } = useContext(
+    RecipeListContext
+  );
 
   const [input, setInput] = useState("");
 
   const onClickingAdd = () => {
-    addIngredient(input);
-    setInput("");
+    if (editItem !== null) {
+      editIngredient(input, editItem.id);
+    } else {
+      addIngredient(input);
+      setInput("");
+    }
   };
+
+  useEffect(() => {
+    if (editItem !== null) {
+      setInput(editItem.name);
+    } else {
+      setInput("");
+    }
+  }, [editItem]);
 
   return (
     <>
       <form className="food-input">
+        <h3>Your Shopping List:</h3>
         <input
           type="text"
           className="food-input"
-          placeholder="Input ingredient"
+          placeholder="Input ingredient..."
           required
           value={input}
           onChange={(e) => {
@@ -28,8 +43,8 @@ const RecipeForm = () => {
         />
         <br />
         <div>
-          <div className="btn">
-            <h3 onClick={onClickingAdd}>Add Ingredient</h3>
+          <div className="btn" onClick={onClickingAdd}>
+            <p>{editItem !== null ? "Edit Ingredient" : "Add Ingredient"}</p>
           </div>
         </div>
       </form>

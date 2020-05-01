@@ -1,9 +1,14 @@
 import React, { useContext } from "react";
 
+import "./Ingredients.scss";
+
 import { RecipeListContext } from "../../Context/RecipeContext";
 
 const Ingredients = () => {
-  const { removeIngredient, ingredients } = useContext(RecipeListContext);
+  const { removeIngredient, ingredients, findItem } = useContext(
+    RecipeListContext
+  );
+  console.log(ingredients);
   return (
     <div>
       <ul>
@@ -11,14 +16,23 @@ const Ingredients = () => {
           return (
             <div key={index} style={{ marginTop: "20px" }}>
               <p>
-                {item}
-                <span
+                {item.name}
+                <button
+                  className="remove-btn"
                   onClick={() => {
-                    removeIngredient(index);
+                    removeIngredient(item.id);
                   }}
                 >
-                  - clear
-                </span>
+                  <span>X</span>
+                </button>
+                <button
+                  className="edit-btn"
+                  onClick={() => {
+                    findItem(item);
+                  }}
+                >
+                  <span>edit</span>
+                </button>
               </p>
             </div>
           );
